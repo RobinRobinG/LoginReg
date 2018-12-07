@@ -45,9 +45,17 @@ namespace LoginRegistration.Controllers
         [Route("success")]
         public IActionResult success(LoginUser user)
         {
-            ViewBag.useremail = user.Email;
+            ViewBag.userID = HttpContext.Session.GetInt32("UserID");
             return View();
-        }      
+        }
+        
+        [HttpGet]
+        [Route("logout")]
+        public IActionResult logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("login");
+        }
 
         [HttpPost]
         [Route("register")]
@@ -107,6 +115,7 @@ namespace LoginRegistration.Controllers
                     ModelState.AddModelError("Password", "Incorrect Password");
                     return View("Login");
                 }
+                HttpContext.Session.SetInt32("UserID", userInDb.UserId);
                 return RedirectToAction("Success");
             }
             return View("Login");
