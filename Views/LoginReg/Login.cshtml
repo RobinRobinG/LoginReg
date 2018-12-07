@@ -1,0 +1,23 @@
+@model LoginRegistration.Models.User;
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="wrapper">
+    <div class="header">
+        <h1>Login:</h1>
+    </div>
+    <a href="/">Home</a>
+    <form asp-action="Login" asp-controller="LoginUser" method="POST">
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control">
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control">
+            <span asp-validation-for="Password"></span>
+        </div>
+        <input type="submit" />
+    </form>
+</div>
